@@ -9,6 +9,7 @@ import Services from './pages/services';
 import About from './pages/about';
 import Projects from './pages/projects';
 import Contact from './pages/contact';
+import Register from './pages/register';
 
 function App() {
     const { user, setUser } = useState(null);
@@ -39,7 +40,22 @@ function App() {
                             </li>
                         </ul>
                         <ul className="navbar-nav ml-auto">
-                            {user ? (<></>) : (<>SignUp</>)}
+                            {user ? (<>
+                                
+                            </>) 
+                            
+                            : 
+                            
+                            
+                            (<>
+                                 <li className="nav-item">
+                                    <Link className="nav-link" to='/register'>Register</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to='/login'>Login</Link>
+                                </li>
+                            
+                             </>)}
                         </ul>
                     </div>
                 </nav>
@@ -50,6 +66,7 @@ function App() {
                         <Route path="/about" element={<About />} />
                         <Route path="/projects" element={<Projects />} />
                         <Route path="/contact" element={<Contact />} />
+                        <Route path="/register" element={<Register />} />
                     </Routes>
                 </div>
                 <nav className="navbar fixed-bottom navbar-light bg-light">
