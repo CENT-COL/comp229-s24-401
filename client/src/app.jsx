@@ -6,6 +6,8 @@ import Contact from './pages/contact';
 import About from './pages/about';
 import Register from './pages/register';
 import Login from './pages/login';
+import Projectlist from './pages/project-list';
+import ProjectDetails from './pages/project-detail';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -81,9 +83,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
-            {/* <Route path="/projects" element={<ProjectList />} />
+            <Route path="/projects" element={<Projectlist />} />
             <Route path="/project-details" element={<ProjectDetails />} />
-            <Route path="/project-details/:id" element={<ProjectDetails />} /> */}
+            <Route path="/project-details/:id" element={<ProjectDetails />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/register" element={<Register />} />
