@@ -55,7 +55,7 @@ exports.setup2FA = async (req, res) => {
     );
 
     // Generate a QR code
-    qrcode.toDataUrl(otpauth, async (err, imageUrl) => {
+    qrcode.toDataURL(otpauth, async (err, imageUrl) => {
         if (err){
             return res.status(500).json({ message: "Error generating the QR code", err });
         }
