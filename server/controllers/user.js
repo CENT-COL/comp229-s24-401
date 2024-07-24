@@ -21,13 +21,21 @@ exports.register = async(req, res) => {
 }
 // Login a User
 exports.login = async (req, res) => {
+    const { email, password} = req.body;
+    console.log("Email and Password", email, password );
+
     try {
         const { email, password} = req.body;
         const user = await User.findOne({ email });
+        
         if(!user) 
             return res.status(400).json({ message: 'User not found' });
 
+        console.log("User", user);
+
         const isMatch = await user.comparePassword(password);
+
+        console.log("Matching password", isMatch)
 
         if(!isMatch){
             return res.status(400).json({ message: 'Invalid credentials' });
@@ -62,10 +70,16 @@ exports.setup2FA = async (req, res) => {
 
         try {
             // Store the secret in the user's profile (on DB)
+            // const user = await User.findOneAndUpdate(
+            //     {email},
+            //     {otpSecret: secret}
+            // );
+
             const user = await User.findOneAndUpdate(
-                {email},
-                {otpSecret: secret}
-            );
+                {email}, 
+                {$set: {otpSecret: secret}},
+                {new:true}
+            )
 
             if(!user){
                 return res.status(404).json({ message: 'User not found' });

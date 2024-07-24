@@ -65,6 +65,9 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log("Form", form);
+
         try {
             console.log("API Url", apiUrl);
             const response = await fetch(`${apiUrl}/users/register`, {
@@ -80,6 +83,7 @@ const Register = () => {
             }
 
             const data = await response.json();
+            console.log("Server Response", data);
             //Proceed to 2FA Setup
             await setup2FA(data.email);
             setStep(2);
