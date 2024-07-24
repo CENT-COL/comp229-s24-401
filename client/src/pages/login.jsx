@@ -39,6 +39,7 @@ const Login = ({ setUser }) => {
       }
 
       const data = await response.json();
+      console.log("Response Data Before 2FA", data);
 
       // Check if the user has 2FA enabled
       if(data.is2FAEnabled){
@@ -47,9 +48,9 @@ const Login = ({ setUser }) => {
       } else{
         // Complete the login process as usual
         localStorage.setItem('token', data.token);
-      localStorage.setItem('username', data.username);
-      setUser({ username: data.username, token: data.token });
-      navigate('/');
+        localStorage.setItem('username', data.username);
+        setUser({ username: data.username, token: data.token });
+        navigate('/');
       }
 
     } catch (error) {

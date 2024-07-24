@@ -3,6 +3,7 @@ const qrcode = require('qrcode');
 const User = require('../models/user');
 const generateToken = require('../utils/jwt');
 const jwt = require('jsonwebtoken');
+const { is } = require('express/lib/request');
 
 // Register a User
 exports.register = async(req, res) => {
@@ -42,7 +43,7 @@ exports.login = async (req, res) => {
         }
 
         const token = generateToken(user);
-        res.json({ message: 'User logged in successfully', token, username: user.username });
+        res.json({ message: 'User logged in successfully', token, username: user.username, is2FAEnabled: user.is2FAEnabled });
 
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -70,16 +71,10 @@ exports.setup2FA = async (req, res) => {
 
         try {
             // Store the secret in the user's profile (on DB)
-            // const user = await User.findOneAndUpdate(
-            //     {email},
-            //     {otpSecret: secret}
-            // );
-
             const user = await User.findOneAndUpdate(
-                {email}, 
-                {$set: {otpSecret: secret}},
-                {new:true}
-            )
+                {email},
+                {otpSecret: secret}
+            );
 
             if(!user){
                 return res.status(404).json({ message: 'User not found' });
