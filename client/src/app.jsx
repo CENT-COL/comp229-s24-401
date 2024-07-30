@@ -8,6 +8,7 @@ import Register from './pages/register';
 import Login from './pages/login';
 import Projectlist from './pages/project-list';
 import ProjectDetails from './pages/project-detail';
+import WebSocketComponent from './pages/websocket';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -55,6 +56,9 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to="/about">About</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/wschat">WebSocket</Link>
+              </li>
             </ul>
             <ul className="navbar-nav ml-auto">
               {user ? (
@@ -88,6 +92,7 @@ function App() {
             <Route path="/project-details/:id" element={<ProjectDetails />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/wschat" element={<WebSocketComponent />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login setUser={setUser} />} />
           </Routes>
